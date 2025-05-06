@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Modern Art Movements</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(120deg, rgba(44, 62, 80, 0.9), rgba(231, 76, 60, 0.9));
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0 4rem;
+        }
+        
+        .timeline {
+            position: relative;
+            height: 5px;
+            background-color: var(--primary-color);
+            margin: 2rem 0;
+        }
+        
+        .timeline-point {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            top: -5px;
+            transform: translateY(0);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .timeline-point:hover {
+            transform: scale(1.5);
+        }
+        
+        .timeline-label {
+            position: absolute;
+            top: 15px;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background-color: var(--light-color);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .movements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .movement-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .movement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .movement-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .card-description {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .card-date {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-top: auto;
+        }
+        
+        .stats-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        .chart-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 3rem 0;
+        }
+        
+        .chart-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .chart-description {
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .bar-chart {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 20px 0;
+        }
+        
+        .bar {
+            width: 40px;
+            background-color: var(--accent-color);
+            position: relative;
+            transition: var(--transition);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .bar:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 0.8rem;
+            width: 80px;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        
+        .modal-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .modal-description {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-artists {
+            margin-top: 1rem;
+        }
+        
+        .modal-artists h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-artists ul {
+            list-style-position: inside;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tbody tr {
+            background-color: white;
+            transition: var(--transition);
+        }
+        
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .movements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                min-width: 100%;
+            }
+            
+            .bar-chart {
+                height: 200px;
+            }
+            
+            .bar {
+                width: 20px;
+            }
+            
+            .bar-label {
+                font-size: 0.7rem;
+                width: 60px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class=\"header-bg\"></div>
+        <div class=\"header-content\">
+            <h1>Modern Art Movements</h1>
+            <p class=\"subtitle\">Exploring the revolutionary artistic expressions that shaped the modern world</p>
+        </div>
+    </header>
+    
+    <div class=\"container\">
+        <section class=\"intro\">
+            <h2>Introduction to Modern Art</h2>
+            <p>Modern art encompasses artistic work produced during the period extending roughly from the 1860s to the 1970s, and denotes the styles and philosophies of the art produced during that era. The term is usually associated with art in which the traditions of the past have been thrown aside in a spirit of experimentation. Modern artists experimented with new ways of seeing and with fresh ideas about the nature of materials and functions of art. These movements challenged traditional conceptions of art, and redefined what a work of art could be.</p>
+        </section>
+        
+        <div class=\"timeline-container\">
+            <h2>Timeline of Modern Art Movements</h2>
+            <div class=\"timeline\" id=\"timeline\">
+                <!-- Timeline points will be added by JavaScript -->
+            </div>
+        </div>
+        
+        <div class=\"filter-container\">
+            <button class=\"filter-btn active\" data-filter=\"all\">All Movements</button>
+            <button class=\"filter-btn\" data-filter=\"1800s\">19th Century</button>
+            <button class=\"filter-btn\" data-filter=\"1900-1940\">Early 20th Century</button>
+            <button class=\"filter-btn\" data-filter=\"1940-1970\">Mid 20th Century</button>
+        </div>
+        
+        <div class=\"movements-grid\" id=\"movements-grid\">
+            <!-- Movement cards will be added by JavaScript -->
+        </div>
+    </div>
+    
+    <section class=\"stats-section\">
+        <div class=\"container\">
+            <div class=\"stats-container\">
+                <div class=\"stat-item\">
+                    <div class=\"stat-number\" id=\"stat-movements\">17</div>
+                    <div class=\"stat-label\">Major Movements</div>
+                </div>
+                <div class=\"stat-item\">
+                    <div class=\"stat-number\" id=\"stat-years\">110</div>
+                    <div class=\"stat-label\">Years of Innovation</div>
+                </div>
+                <div class=\"stat-item\">
+                    <div class=\"stat-number\" id=\"stat-artists\">100+</div>
+                    <div class=\"stat-label\">Influential Artists</div>
+                </div>
+                <div class=\"stat-item\">
+                    <div class=\"stat-number\" id=\"stat-museums\">50+</div>
+                    <div class=\"stat-label\">Major Museums</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class=\"container\">
+        <div class=\"chart-container\">
+            <div class=\"chart-header\">
+                <h3 class=\"chart-title\">Influence of Art Movements Over Time</h3>
+                <p class=\"chart-description\">A representation of the relative influence and popularity of different art movements throughout the modern period.</p>
+            </div>
+            <div class=\"bar-chart\" id=\"influence-chart\">
+                <!-- Bars will be added by JavaScript -->
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Movement</th>
+                    <th>Time Period</th>
+                    <th>Key Characteristics</th>
+                    <th>Notable Artists</th>
+                </tr>
+            </thead>
+            <tbody id=\"movement-table\">
+                <!-- Table rows will be added by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
+    <footer>
+        <div class=\"footer-content\">
+            <h3>Modern Art Movements</h3>
+            <p>Explore the rich history and diversity of modern art through this comprehensive guide to the major art movements of the 19th and 20th centuries.</p>
+            <div class=\"footer-links\">
+                <a href=\"#\" class=\"footer-link\">About</a>
+                <a href=\"#\" class=\"footer-link\">Contact</a>
+                <a href=\"#\" class=\"footer-link\">Resources</a>
+                <a href=\"#\" class=\"footer-link\">Museums</a>
+            </div>
+            <p>&copy; 2023 Modern Art Movements. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <div class=\"back-to-top\" id=\"back-to-top\">↑</div>
+    
+    <div class=\"modal\" id=\"movement-modal\">
+        <div class=\"modal-content\">
+            <button class=\"close-modal\" id=\"close-modal\">&times;</button>
+            <img src=\"\" alt=\"\" class=\"modal-image\" id=\"modal-image\">
+            <h2 class=\"modal-title\" id=\"modal-title\"></h2>
+            <p class=\"modal-date\" id=\"modal-date\"></p>
+            <p class=\"modal-description\" id=\"modal-description\"></p>
+            <div class=\"modal-artists\">
+                <h4>Key Artists:</h4>
+                <ul id=\"modal-artists-list\"></ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Art movement data
+        const artMovements = [
+            {
+                name: \"Impressionism\",
+                period: \"1860s-1890s\",
+                description: \"Impressionism is characterized by small, thin, yet visible brush strokes, open composition, emphasis on accurate depiction of light in its changing qualities, ordinary subject matter, and unusual visual angles.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/800px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg\",
+                artists: [\"Claude Monet\", \"Pierre-Auguste Renoir\", \"Edgar Degas\", \"Camille Pissarro\"],
+                timeframe: \"1800s\",
+                influence: 85
+            },
+            {
+                name: \"Post-Impressionism\",
+                period: \"1886-1905\",
+                description: \"Post-Impressionism extends Impressionism while rejecting its limitations. The artists used vivid colors, thick application of paint, distinctive brushstrokes, and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary color.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/757px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg\",
+                artists: [\"Vincent van Gogh\", \"Paul Cézanne\", \"Georges Seurat\", \"Paul Gauguin\"],
+                timeframe: \"1800s\",
+                influence: 80
+            },
+            {
+                name: \"Art Nouveau\",
+                period: \"1890-1910\",
+                description: \"Art Nouveau is an international style of art, architecture, and applied art, characterized by highly-stylized, flowing, curvilinear designs often incorporating floral and other plant-inspired motifs.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Alfons_Mucha_-_F._Champenois_Imprimeur-%C3%89diteur.jpg/800px-Alfons_Mucha_-_F._Champenois_Imprimeur-%C3%89diteur.jpg\",
+                artists: [\"Alphonse Mucha\", \"Gustav Klimt\", \"Antoni Gaudí\", \"Louis Comfort Tiffany\"],
+                timeframe: \"1900-1940\",
+                influence: 70
+            },
+            {
+                name: \"Fauvism\",
+                period: \"1904-1908\",
+                description: \"Fauvism is characterized by strong brushwork and strident colors, while objects are simplified and often rendered with little or no perspective. The name comes from 'fauves' (wild beasts), given to them by critic Louis Vauxcelles.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Matissedance.jpg/800px-Matissedance.jpg\",
+                artists: [\"Henri Matisse\", \"André Derain\", \"Maurice de Vlaminck\", \"Georges Braque\"],
+                timeframe: \"1900-1940\",
+                influence: 65
+            },
+            {
+                name: \"Expressionism\",
+                period: \"1905-1920\",
+                description: \"Expressionism is a modernist movement that sought to express emotional experience rather than physical reality. Artists distorted forms and used strong colors to convey anxiety, fear, or other emotional states.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Edvard_Munch_-_The_Scream_-_Google_Art_Project.jpg/800px-Edvard_Munch_-_The_Scream_-_Google_Art_Project.jpg\",
+                artists: [\"Edvard Munch\", \"Ernst Ludwig Kirchner\", \"Wassily Kandinsky\", \"Egon Schiele\"],
+                timeframe: \"1900-1940\",
+                influence: 75
+            },
+            {
+                name: \"Cubism\",
+                period: \"1907-1914\",
+                description: \"Cubism revolutionized European painting and sculpture by abandoning the single viewpoint perspective in favor of a multi-faceted approach, showing objects from multiple viewpoints simultaneously.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Picasso_Les_Demoiselles_d%27Avignon.jpg/800px-Picasso_Les_Demoiselles_d%27Avignon.jpg\",
+                artists: [\"Pablo Picasso\", \"Georges Braque\", \"Juan Gris\", \"Fernand Léger\"],
+                timeframe: \"1900-1940\",
+                influence: 90
+            },
+            {
+                name: \"Futurism\",
+                period: \"1909-1914\",
+                description: \"Futurism emphasized speed, technology, youth, violence, and objects such as the car, the airplane, and the industrial city. It glorified modernity and aimed to liberate Italy from the weight of its past.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Umberto_Boccioni_-_Dynamism_of_a_Soccer_Player.jpg/800px-Umberto_Boccioni_-_Dynamism_of_a_Soccer_Player.jpg\",
+                artists: [\"Filippo Tommaso Marinetti\", \"Umberto Boccioni\", \"Giacomo Balla\", \"Carlo Carrà\"],
+                timeframe: \"1900-1940\",
+                influence: 60
+            },
+            {
+                name: \"Constructivism\",
+                period: \"1915-1930\",
+                description: \"Constructivism was an artistic and architectural philosophy that originated in Russia beginning in 1913 by Vladimir Tatlin. It rejected autonomous art in favor of art as a practice directed towards social purposes.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/El_Lissitzky%27s_poster_Beat_the_Whites_with_the_Red_Wedge_%281919%29.jpg/800px-El_Lissitzky%27s_poster_Beat_the_Whites_with_the_Red_Wedge_%281919%29.jpg\",
+                artists: [\"Vladimir Tatlin\", \"Alexander Rodchenko\", \"El Lissitzky\", \"Naum Gabo\"],
+                timeframe: \"1900-1940\",
+                influence: 65
+            },
+            {
+                name: \"Dada\",
+                period: \"1916-1924\",
+                description: \"Dada was an art movement formed during World War I in Zurich in negative reaction to the horrors and folly of the war. The art, poetry and performance produced by dada artists is often satirical and nonsensical in nature.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Duchamp_-_Fountain.jpg/600px-Duchamp_-_Fountain.jpg\",
+                artists: [\"Marcel Duchamp\", \"Man Ray\", \"Francis Picabia\", \"Hannah Höch\"],
+                timeframe: \"1900-1940\",
+                influence: 80
+            },
+            {
+                name: \"Surrealism\",
+                period: \"1924-1950s\",
+                description: \"Surrealism aimed to revolutionize human experience, rejecting rational thought for the unconscious mind and dreams. It was influenced by Freudian psychology and sought to reconcile the contradictory conditions of dream and reality.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/The_Persistence_of_Memory.jpg/300px-The_Persistence_of_Memory.jpg\",
+                artists: [\"Salvador Dalí\", \"René Magritte\", \"Max Ernst\", \"Joan Miró\"],
+                timeframe: \"1900-1940\",
+                influence: 85
+            },
+            {
+                name: \"Bauhaus\",
+                period: \"1919-1933\",
+                description: \"The Bauhaus was a German art school operational from 1919 to 1933 that combined crafts and the fine arts, and was famous for the approach to design that it publicized and taught. It aimed to unify art, craft, and technology.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Bauhaus-Signet.svg/800px-Bauhaus-Signet.svg.png\",
+                artists: [\"Walter Gropius\", \"Wassily Kandinsky\", \"Paul Klee\", \"László Moholy-Nagy\"],
+                timeframe: \"1900-1940\",
+                influence: 75
+            },
+            {
+                name: \"Art Deco\",
+                period: \"1920-1939\",
+                description: \"Art Deco is characterized by rich colors, bold geometric shapes, and lavish ornamentation. It represented luxury, glamour, exuberance, and faith in social and technological progress.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Chrysler_Building_by_David_Shankbone.jpg/800px-Chrysler_Building_by_David_Shankbone.jpg\",
+                artists: [\"Tamara de Lempicka\", \"Erté\", \"A.M. Cassandre\", \"René Lalique\"],
+                timeframe: \"1900-1940\",
+                influence: 70
+            },
+            {
+                name: \"Suprematism\",
+                period: \"1915-1930\",
+                description: \"Suprematism is an art movement focused on basic geometric forms, such as circles, squares, lines, and rectangles, painted in a limited range of colors. It was founded by Kazimir Malevich in Russia, and was concerned with the supremacy of pure artistic feeling rather than the visual depiction of objects.\",
+                image: \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Malevich.black-square.jpg/800px-Malevich.black-square.jpg\",
+                artists: [\"Kazimir Malevich\", \"El Lissitzky\", \"Lyubov Popova\", \"Olga Rozanova\"],
+                timeframe: \"1900-1940\",
+                influence: 60
+            },
+            {
+                name: \"Abstract Expressionism\",
+                period: \"1940s-1950s\",
+                description: \"Abstract Expressionism is characterized by gestural brush-strokes or mark-making, and the impression of spontaneity. It emerged in the aftermath of World War II, with artists creating works that reflected the anxiety and trauma of the atomic age.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Pollockautumn.jpg/800px-Pollockautumn.jpg\",
+                artists: [\"Jackson Pollock\", \"Willem de Kooning\", \"Mark Rothko\", \"Clyfford Still\"],
+                timeframe: \"1940-1970\",
+                influence: 85
+            },
+            {
+                name: \"Pop Art\",
+                period: \"1950s-1970s\",
+                description: \"Pop Art challenged traditions of fine art by including imagery from popular and mass culture, such as advertising, comic books and mundane mass-produced objects. It often employed hard-edged, representational, and commercial techniques.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/9/9c/Warhol-Campbell_Soup-1-screenprint-1968.jpg/800px-Warhol-Campbell_Soup-1-screenprint-1968.jpg\",
+                artists: [\"Andy Warhol\", \"Roy Lichtenstein\", \"Richard Hamilton\", \"Claes Oldenburg\"],
+                timeframe: \"1940-1970\",
+                influence: 90
+            },
+            {
+                name: \"Op Art\",
+                period: \"1960s\",
+                description: \"Op art, short for optical art, is a style of visual art that uses optical illusions. Op artworks are abstract, with many better-known pieces created in black and white. They typically give the viewer the impression of movement, hidden images, flashing and vibrating patterns, or of swelling or warping.\",
+                image: \"https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Movement_in_Squares.jpg/800px-Movement_in_Squares.jpg\",
+                artists: [\"Victor Vasarely\", \"Bridget
